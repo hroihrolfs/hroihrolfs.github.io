@@ -20,6 +20,7 @@ function random(min, max) {
 const fullscreen = document.getElementById("FullScreenButton");
 const game = document.getElementById("game");
 
+
 // event listinerar
 window.addEventListener("load", (event) => {
     // gameOn();
@@ -331,7 +332,7 @@ function gameOn() {
         pacman.hp--;
         pacman.isCollindingGhost =  false;
     }
-    if (pacman.hp === 0){
+    if (pacman.hp <= 0){
         return gameOverText();
     }
 
@@ -448,6 +449,9 @@ function ghostBlinkStart(){
     }
 }
 
+function restart(){
+}
+
 
 function toggleFullScreen(){
     if(!document.fullscreenElement){
@@ -467,5 +471,8 @@ window.addEventListener("keydown", event => {
 
 fullscreen.addEventListener("click", toggleFullScreen)
 
-const oppositeOrientation = screen.orientation.startsWith("landscape");
-screen.orientation.lock(oppositeOrientation);
+
+// const oppositeOrientation = screen.orientation.startsWith("landscape");
+// screen.orientation.lock(oppositeOrientation);
+
+screen.orientation.lock("landscape");
