@@ -23,7 +23,7 @@ const game = document.getElementById("game");
 
 // event listinerar
 window.addEventListener("load", (event) => {
-    // gameOn();
+    gameOn();
 });
 
 window.addEventListener("resize", function()
@@ -333,7 +333,7 @@ function gameOn() {
         pacman.isCollindingGhost =  false;
     }
     if (pacman.hp <= 0){
-        return gameOverText();
+        gameOverText();
     }
 
 
@@ -450,13 +450,26 @@ function ghostBlinkStart(){
 }
 
 function restart(){
+    pacman.hp = 3;
+    dots = [];
+    while (dots.length < 5) {
+        let dot = new Dots(
+          random(50, screen.width - 50),
+          random(50, screen.height - 50),
+          7,
+          "rgb(255,255,0)",
+          false,
+        );
+      
+        dots.push(dot);
+      }
+
 }
 
 
 function toggleFullScreen(){
     if(!document.fullscreenElement){
         game.requestFullscreen();
-        gameOn();
     } else {
         document.exitFullscreen();
     }
@@ -472,7 +485,14 @@ window.addEventListener("keydown", event => {
 fullscreen.addEventListener("click", toggleFullScreen)
 
 
-// const oppositeOrientation = screen.orientation.startsWith("landscape");
-// screen.orientation.lock(oppositeOrientation);
+screen.lockOrientationUniversal =
+  screen.lockOrientation ||
+  screen.mozLockOrientation ||
+  screen.msLockOrientation;
 
-screen.orientation.lock("landscape");
+if (screen.lockOrientationUniversal("landscape-primary")) {
+    // Orientation was locked
+} else {
+    // Orientation lock failed
+}
+
