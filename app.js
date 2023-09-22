@@ -333,7 +333,7 @@ function gameOn() {
         pacman.isCollindingGhost =  false;
     }
     if (pacman.hp <= 0){
-        gameOverText();
+        return gameOverText();
     }
 
 
@@ -449,27 +449,12 @@ function ghostBlinkStart(){
     }
 }
 
-function restart(){
-    pacman.hp = 3;
-    dots = [];
-    while (dots.length < 5) {
-        let dot = new Dots(
-          random(50, screen.width - 50),
-          random(50, screen.height - 50),
-          7,
-          "rgb(255,255,0)",
-          false,
-        );
-      
-        dots.push(dot);
-      }
-
-}
 
 
 function toggleFullScreen(){
     if(!document.fullscreenElement){
         game.requestFullscreen();
+        lock("landscape");
     } else {
         document.exitFullscreen();
     }
@@ -484,15 +469,6 @@ window.addEventListener("keydown", event => {
 
 fullscreen.addEventListener("click", toggleFullScreen)
 
-
-screen.lockOrientationUniversal =
-  screen.lockOrientation ||
-  screen.mozLockOrientation ||
-  screen.msLockOrientation;
-
-if (screen.lockOrientationUniversal("landscape-primary")) {
-    // Orientation was locked
-} else {
-    // Orientation lock failed
+function lock (orientation){
+    screen.orientation.lock(orientation);
 }
-
