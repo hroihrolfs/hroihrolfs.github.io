@@ -23,6 +23,7 @@ const game = document.getElementById("game");
 
 // event listinerar
 window.addEventListener("load", (event) => {
+    lockToLandscape();
     gameOn();
 });
 
@@ -32,7 +33,6 @@ window.addEventListener("resize", function()
     canvas.height = window.innerHeight;
     powerpelletUpdate();
 });
-
 
 
 screen.orientation.lock("landscape");
@@ -469,5 +469,11 @@ window.addEventListener("keydown", event => {
 
 fullscreen.addEventListener("click", toggleFullScreen)
 
-
+function lockToLandscape() {
+    if (screen.orientation) {
+        screen.orientation.lock("landscape").catch(function(error) {
+            console.error("Orientation lock failed:", error);
+        });
+    }
+}
 
