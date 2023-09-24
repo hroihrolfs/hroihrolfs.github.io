@@ -35,6 +35,7 @@ window.addEventListener("resize", function()
 
 
 
+screen.orientation.lock("landscape");
 
 
 // ------------------------------------------------------------------------
