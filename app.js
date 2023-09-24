@@ -23,7 +23,6 @@ const game = document.getElementById("game");
 
 // event listinerar
 window.addEventListener("load", (event) => {
-   alert("tjekk");
     lockToLandscape();
     gameOn();
 });
