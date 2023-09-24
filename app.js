@@ -454,7 +454,6 @@ function ghostBlinkStart(){
 function toggleFullScreen(){
     if(!document.fullscreenElement){
         game.requestFullscreen();
-        lock("landscape");
     } else {
         document.exitFullscreen();
     }
@@ -469,6 +468,18 @@ window.addEventListener("keydown", event => {
 
 fullscreen.addEventListener("click", toggleFullScreen)
 
-function lock (orientation){
-    screen.orientation.lock(orientation);
+// function lock (orientation){
+//     screen.orientation.lock(orientation);
+// }
+
+function lockToLandscape() {
+    if (window.matchMedia("(orientation: portrait)").matches) {
+        alert("Please rotate your device to landscape mode for the best experience.");
+    }
 }
+
+// Check and lock on page load
+lockToLandscape();
+
+// Add an event listener for orientation change
+window.addEventListener("resize", lockToLandscape);
